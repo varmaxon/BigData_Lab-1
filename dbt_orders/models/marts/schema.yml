@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: fct_revenue
+    description: "Выручка по месяцам и сегментам клиентов"
+    columns:
+      - name: month
+        description: "Первый день месяца"
+        tests:
+          - not_null
+      - name: segment
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["B2B", "B2C"]
+      - name: total_revenue
+        tests:
+          - not_null
+
+  - name: fct_top_products
+    description: "Топ-5 товаров по выручке за последние три месяца данных"
+    columns:
+      - name: total_revenue
+        tests:
+          - not_null

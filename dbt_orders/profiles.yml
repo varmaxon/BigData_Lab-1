@@ -1,0 +1,8 @@
+dbt_orders_dev:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # DuckDB хранит результаты моделей в этом файле
+      path: "{{ env_var('LAB_DIR', '..') }}/data/warehouse.duckdb"
+      threads: 2

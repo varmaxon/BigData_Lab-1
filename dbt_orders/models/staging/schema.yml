@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Очищенные заказы из raw_orders"
+    columns:
+      - name: order_id
+        description: "Уникальный идентификатор заказа"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: amount
+        description: "Сумма заказа в рублях"
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ["pending", "shipped", "cancelled", "returned"]
+
+  - name: stg_customers
+    description: "Очищенные данные клиентов"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: segment
+        tests:
+          - accepted_values:
+              values: ["B2B", "B2C"]
